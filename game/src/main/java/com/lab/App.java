@@ -1,5 +1,7 @@
 package com.lab;
 
+import java.util.Scanner;
+
 /**
  * Hello world!
  */
@@ -24,9 +26,25 @@ public class App {
     public static void main(String[] args) {
         // Task 3: Implement a menu to select the mine field template
         // Design the menu by yourself.
-                
+        Scanner scan = new Scanner(System.in);
+        
         Minesweeper game = initMineField();
-        // Minesweeper game = initMineFieldFromFile("minefield/minefield01.txt");
-        game.displayField();
+        //Minesweeper game = initMineFieldFromFile("minefield/minefield01.txt");
+       
+        while (true) {
+            game.displayField();
+            System.out.println("Enter command: (d to defuse after that input x and y , q to quit)");
+            String command = scan.next();
+            if (command.equals("q")) {
+                break;
+            } else if (command.equals("d")) {
+                int x = scan.nextInt();
+                int y = scan.nextInt();
+                game.defuseMine(x-1, y-1);
+            } else {
+                System.out.println("Invalid command!");
+            }
+        }
+        scan.close();
     }    
 }

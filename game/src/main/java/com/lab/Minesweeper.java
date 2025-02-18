@@ -1,5 +1,6 @@
 package com.lab;
 
+import java.util.Random;
 import java.util.Scanner;
 import java.io.InputStream;
 
@@ -11,6 +12,10 @@ public class Minesweeper {
     int fieldX, fieldY;
     int[][] cells;
     String fieldFileName;
+
+     int defuseAttempts = 0;
+     int totalMines = 0;
+    Random rand = new Random();
 
     public Minesweeper(String fieldFile) {
         this.fieldFileName = fieldFile;
@@ -45,6 +50,7 @@ public class Minesweeper {
 
     void setMineCell(int x, int y) {
         cells[x][y] = IS_MINE;
+        totalMines++;
     }
 
     void initFromFile(String mineFieldFile) {
@@ -63,8 +69,39 @@ public class Minesweeper {
                     cells[i][j] = IS_SAFE;
             }
         }
- 
+        scan.close();
         // Task 2: Using `java.util.Scanner` to load mine field from the input stream named, `is`
  
+    }
+
+    void defuseMine(int x, int y) {
+        if (cells[x][y] == IS_MINE) {
+            cells[x][y] = IS_SAFE;
+            totalMines--;
+            System.out.println("Mine defused successfully!");
+            System.out.println("total mine left: "+totalMines);
+            defuseAttempts = 0; 
+            if (totalMines == 0) {
+                System.out.println("Congratulations! You have defused all mines and won the game!");
+                System.exit(0);
+            }
+        } else {
+            System.out.println("No mine at this location!");
+            defuseAttempts++;
+            if (defuseAttempts >= 3) {
+                addRandomMine();
+                defuseAttempts = 0;
+            }
+        }
+    }
+
+    void addRandomMine() {
+        int x, y;
+        do {
+            x = rand.nextInt(fieldX);
+            y = rand.nextInt(fieldY);
+        } while (cells[x][y] == IS_MINE);
+        cells[x][y] = IS_MINE;
+        System.out.println("A new mine has been added!");
     }
 }
