@@ -85,7 +85,7 @@ public class Minesweeper {
                 System.out.println("Congratulations! You have defused all mines and won the game!");
                 System.exit(0);
             }
-        } else {
+        }else {
             System.out.println("No mine at this location!");
             defuseAttempts++;
             if (defuseAttempts >= 3) {
@@ -101,7 +101,11 @@ public class Minesweeper {
             x = rand.nextInt(fieldX);
             y = rand.nextInt(fieldY);
         } while (cells[x][y] == IS_MINE);
+    
+        
         cells[x][y] = IS_MINE;
-        System.out.println("A new mine has been added!");
+        totalMines++; // เพิ่มจำนวนระเบิด
+        System.out.println("Mine added!!!!!!!!!");
+        System.out.println("After adding mine: " + totalMines); // Debug log
     }
 }

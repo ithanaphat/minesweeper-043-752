@@ -11,13 +11,13 @@ public class App {
         game.setMineCell(0, 1);
         game.setMineCell(1, 5);
         game.setMineCell(1, 8);
-        game.setMineCell(2, 4);
-        game.setMineCell(3, 6);        
-        game.setMineCell(4, 2);
-        game.setMineCell(5, 4);
-        game.setMineCell(6, 2);
-        game.setMineCell(7, 2);
-        game.setMineCell(8, 6);
+        //game.setMineCell(2, 4);
+        //game.setMineCell(3, 6);        
+        //game.setMineCell(4, 2);
+        //game.setMineCell(5, 4);
+        //game.setMineCell(6, 2);
+        //game.setMineCell(7, 2);
+       // game.setMineCell(8, 6);
         return game;
     }
     static Minesweeper initMineFieldFromFile(String minefieldFile) {
@@ -47,4 +47,5 @@ public class App {
         }
         scan.close();
     }    
+    
 }
